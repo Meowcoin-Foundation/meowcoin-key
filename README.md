@@ -1,8 +1,8 @@
-# Telestai-key
+# Meowcoin-key
 
-Generate Telestai addresses from a mnemonic phrase following the standards BIP32, BIP39, BIP44.
+Generate Meowcoin addresses from a mnemonic phrase following the standards BIP32, BIP39, BIP44.
 
-That is, use your 12 words to get addresses for Telestai mainnet.
+That is, use your 12 words to get addresses for Meowcoin mainnet.
 
 
 ## Example get external and internal (change) addresses by path
@@ -11,16 +11,16 @@ A simple and "spot on" way to generate/derive addresses.
 
 If you need brutal performance check out getAddressByPath example below.
 
-```
-import TelestaiKey from "@Telestai-Project/telestai-key";
+```javascript
+import MeowcoinKey from "@meowcoin-foundation/meowcoin-key";
 //Or import as CommonsJS module
-//const TelestaiKey = require("@Telestai-Project/telestai-key");
+//const MeowcoinKey = require("@meowcoin-foundation/meowcoin-key");
 
-const mnemonic = TelestaiKey.generateMnemonic();
+const mnemonic = MeowcoinKey.generateMnemonic();
 const ACCOUNT = 0; //default is zero
 const POSITION = 0; //the first address for this wallet
-const network = "tls"; //or rvn-test for testnet
-const addressPair = TelestaiKey.getAddressPair(
+const network = "mewc"; //Meowcoin mainnet
+const addressPair = MeowcoinKey.getAddressPair(
   network,
   mnemonic,
   ACCOUNT,
@@ -32,24 +32,24 @@ console.info("Mnemonic", mnemonic);
 console.log(addressPair);
 ```
 
-Outputs (Old example but you get the point)
+Example output:
 
-```
-Mnemonic wrong breeze brick wrestle exotic erode news clown copy install marble promote
+```javascript
+Mnemonic: "orphan resemble brain dwarf bus fancy horn among cricket logic duty crater"
 {
   internal: {
-    address: 'RC7Vn28tGaNrJtBm8MX5RCeCvzMpqZ1MgG',
-    path: "m/44'/175'/0'/1/0",
-    privateKey: 'a2c71a4284ed6792debd68d830a10515051fd166ce00535bf9fd19573ed5413b',
-    WIF: 'L2g8U3ZNBLBQcy5f6C67h2eosps3MGkNmeNnk6Y8fZiMdSB9TuCJ'
+    address: 'MVVPZUYZ5QP2xBF5e8gLLvWc2EMhksE5Ns',
+    path: "m/44'/1669'/0'/1/1",
+    privateKey: '4471ef22126ccb20973bf577539cc7552e99cc177af589a1a17d8d433b836f1d',
+    WIF: 'HcEfqNBM6SoAmX6LQ4usM4ZDtv2FkpwFzwggtcFJbv5C3qedWM65'
   },
   external: {
-    address: 'RE8YxTSYYcftnbX56rnAEwaiddqaqt8UgX',
-    path: "m/44'/175'/0'/0/0",
-    privateKey: 'b998a218e6bfde7162460893f79afc14b82b14e368507f5a85de28848ea96439',
-    WIF: 'L3SV871B2mpUPTvj4U38UEp3Ah3wCVukF7tG2btHgjkiUSXRftSw'
+    address: 'MPo9vi3QM4JqfxGxysFD8xbqFZBSzZAqeG',
+    path: "m/44'/1669'/0'/0/1",
+    privateKey: '91b73176c7e2ac359d5f9c5ea16750475f02346ba5c0db4b96e4c698ff3a7dc3',
+    WIF: 'Hepsf5dCQfjQCPfWhcP5f275iPN6HqUS39asZwJ8mGHf9SufS9bM'
   },
-  position: 0
+  position: 1
 }
 ```
 
@@ -59,30 +59,29 @@ Note this is the fastest way to generate/derive addresses since we can re-use th
 
 BUT its more technical since you have to provide the full BIP44 path.
 
-```
-import TelestaiKey from "@Telestai-Project/telestai-key";
+```javascript
+import MeowcoinKey from "@meowcoin-foundation/meowcoin-key";
 
-//use TelestaiKey.generateMnemonic() to generate mnemonic codes
+//use MeowcoinKey.generateMnemonic() to generate mnemonic codes
 const mnemonic =
-  "Mnemonic erosion total live dial hamster helmet top response cash obey anger balcony";
-const path = "m/44'/175'/0'/0/0";
-const network = "tls";
-const hdKey = TelestaiKey.getHDKey("tls", mnemonic);
+  "orphan resemble brain dwarf bus fancy horn among cricket logic duty crater";
+const path = "m/44'/1669'/0'/0/0";
+const network = "mewc";
+const hdKey = MeowcoinKey.getHDKey(network, mnemonic);
 
-const address = TelestaiKey.getAddressByPath(network, hdKey, path);
+const address = MeowcoinKey.getAddressByPath(network, hdKey, path);
 
 console.log(address);
-
 ```
 
-Outputs (Again another old example but you get the point)
+Example output:
 
-```
+```javascript
 {
-  address: 'RWj697pj6PijkEcJLW3BLPG4GKre3BtgRP',
-  path: "m/44'/175'/0'/0/0",
-  privateKey: 'a5592434532a09a73350906f7846d272135a56b5a34d900659b31d2bb1aa6dfe',
-  WIF: 'L2m8GmGYVAkvUEtLdhbFidQW2Zn3fULpE7sbWgmXChygNEBPd1PK'
+  address: 'MLxh3hVWSfyGA2fu54idyDGCQzwxSafXYi',
+  path: "m/44'/1669'/0'/0/0",
+  privateKey: '3f44c830e10662c86dc1a3c503935c8c2326242cbd2c1fcad71bf4c94e64fcc8',
+  WIF: 'HYemMdnXHRLdDfPiTnfvqfCEjKBRsivt3iKUQbv4kQHmDqajDKwU'
 }
 ```
 
@@ -90,27 +89,27 @@ Outputs (Again another old example but you get the point)
 
 ### ES6 module
 
-```
+```javascript
 //As ES6 module
-import TelestaiKey from "@Telestai-Project/telestai-key";
+import MeowcoinKey from "@meowcoin-foundation/meowcoin-key";
 ```
 
 ### CommonsJS module
 
-```
+```javascript
 //As CommonsJS module
-const TelestaiKey = require("@Telestai-Project/telestai-key");
+const MeowcoinKey = require("@meowcoin-foundation/meowcoin-key");
 ```
 
 ### Browserify
 
-```
-//A browseriy:d version, with all the dependencies bundled for the web
+```html
+<!-- A browserified version, with all the dependencies bundled for the web -->
 <html>
   <body>
-    <script src="./node_modules/@Telestai-Project/telestai-key/dist/TelestaiKey.js"></script>
+    <script src="./node_modules/@meowcoin-foundation/meowcoin-key/dist/MeowcoinKey.js"></script>
     <script>
-      alert(TelestaiKey.generateMnemonic());
+      alert(MeowcoinKey.generateMnemonic());
     </script>
   </body>
 </html>
@@ -118,7 +117,7 @@ const TelestaiKey = require("@Telestai-Project/telestai-key");
 
 ## install
 
-` npm install @Telestai-Project/telestai-key`
+` npm install @meowcoin-foundation/meowcoin-key`
 
 ## build
 
@@ -156,9 +155,9 @@ Source: https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki
 
 `m / purpose' / coin_type' / account' / change / address_index`
 
-So in the case of Telestai the path m/44'/175'/0'/0/0 says "give me the first address"
+So in the case of Meowcoin the path m/44'/1669'/0'/0/0 says "give me the first address"
 
-The first part m/44'/175' says that the purpose is to use BIP44 with Telestai (175). Consider that static code.
+The first part m/44'/1669' says that the purpose is to use BIP44 with Meowcoin (1669). Consider that static code.
 
 Accounts is deprecated and should be 0
 

@@ -11,11 +11,11 @@ import { ec as EC } from 'elliptic';
 import bs58check from 'bs58check';
 import { createHash } from 'crypto';
 
-export type Network = "tls" | "tls-test";
+export type Network = "mewc" | "mewc-test";
 
 function getNetwork(name: Network) {
-  if (name !== "tls") {
-    throw new Error("network must be 'tls'");
+  if (name !== "mewc") {
+    throw new Error("network must be 'mewc' or 'mewc-test'");
   }
 
   return {
@@ -23,10 +23,10 @@ function getNetwork(name: Network) {
       private: 0x0488ade4,
       public: 0x0488b21e,
     },
-    bip44: 10117,
-    private: 0x80,
-    public: 0x42,
-    scripthash: 0x7F,
+    bip44: 1669,
+    private: 0x70,
+    public: 0x32,
+    scripthash: 0x7A,
   };
 }
 /**
@@ -149,7 +149,7 @@ export function getAddressByWIF(network: Network, privateKeyWIF: string) {
 export const entropyToMnemonic = bip39.entropyToMnemonic;
 
 export function generateAddressObject(
-  network: Network = "tls"
+  network: Network = "mewc"
 ): IAddressObject {
   const mnemonic = generateMnemonic();
   const account = 0;
@@ -172,7 +172,7 @@ export function generateAddressObject(
  * @param network
  * @returns
  */
-export function generateAddress(network: Network = "tls") {
+export function generateAddress(network: Network = "mewc") {
   return generateAddressObject(network);
 }
 export default {
